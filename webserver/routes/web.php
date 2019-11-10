@@ -20,9 +20,9 @@ Route::get('/', function () {
 Route::get('/home', 'HomeController@index')->name('home');
 
 
-
+Auth::routes();
 Route::group(['prefix' => 'admin'] , function(){
-    Auth::routes();
+    
     Route::get('/','admin\HomeController@getIndex')->name('admin.home.get.index');
     // -- Categories
     Route::group(['prefix' => 'category'] , function(){
@@ -74,6 +74,31 @@ Route::group(['prefix' => 'admin'] , function(){
     
         Route::post('/create','admin\UserController@postCreate')->name('admin.users.post.create');
         Route::post('/edit/{id}','admin\UserController@postEdit')->name('admin.users.post.edit');
+    });
+    
+});
+
+Route::group(['prefix' => 'api'] , function(){
+    //Route::get('/','api\HomeController@getIndex');
+    Route::group(['prefix' => 'category'] , function(){
+        Route::get('/','api\CategoryController@getIndex');
+        Route::get('/detail/{id}','api\CategoryController@getDetail');
+    });
+    Route::group(['prefix' => 'news'] , function(){
+        Route::get('/{id}','api\NewsController@getIndex');
+        Route::get('/categroup/{id}','api\NewsController@getCateGroup');
+        Route::get('/detail/{id}','api\NewsController@getDetail');
+        
+    });
+    Route::group(['prefix' => 'forms'] , function(){
+        Route::get('/','api\FormController@getIndex');
+        Route::get('/detail/{id}','api\FormController@getDetail');
+        
+    });
+    Route::group(['prefix' => 'partners'] , function(){
+        Route::get('/','api\PartnerController@getIndex');
+        Route::get('/detail/{id}','api\PartnerController@getDetail');
+        
     });
     
 });
