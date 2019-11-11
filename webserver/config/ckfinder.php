@@ -31,7 +31,7 @@ $config['authentication'] = function(){
 // http://docs.cksource.com/ckfinder3-php/configuration.html#configuration_options_licenseKey
 
 $config['licenseName'] = 'se.uit.edu.xyz';
-$config['licenseKey']  = 'F73M81M9DGBV9NYJ2GS1619YRGRK9S58';
+$config['licenseKey']  = 'KX7XD7PGSE8WATB66VUQ82GL7RTGY';
 
 /*============================ CKFinder Internal Directory ============================*/
 // http://docs.cksource.com/ckfinder3-php/configuration.html#configuration_options_privateDir
