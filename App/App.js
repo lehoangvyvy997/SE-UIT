@@ -1,5 +1,5 @@
 import React from 'react';
-import { 
+import {
   View,
   Image,
   ScrollView,
@@ -21,11 +21,10 @@ import ContactStack from './screens/Contact';
 import NotificationStack from './screens/Notification';
 import HelpStack from './screens/Help';
 
-
 import CustomSideBar from './components/SideBar'
 
 export default class App extends React.Component {
- 
+
   render() {
     const AppContainer = createAppContainer(AppDrawerNavigation);
 
@@ -38,9 +37,9 @@ export default class App extends React.Component {
 const CustomDrawerComponent = (props) => (
   <SafeAreaView style={{ flex: 1 }}>
     <View style={{ height: 150, backgroundColor: 'white', alignItems: 'center', justifyContent: 'center' }}>
-      <ImageBackground source={require('./assets/images/banner.png')} style={ styles.wrapBanner } >
-        <Image source={ require('./assets/images/title_logo.png') } />
-        <Text style={ styles.titleBanner }>Khoa Công Nghệ Phần Mềm</Text>
+      <ImageBackground source={require('./assets/images/banner.png')} style={styles.wrapBanner} >
+        <Image source={require('./assets/images/title_logo.png')} />
+        <Text style={styles.titleBanner}>Khoa Công Nghệ Phần Mềm</Text>
       </ImageBackground>
     </View>
     <ScrollView>
@@ -50,14 +49,14 @@ const CustomDrawerComponent = (props) => (
 )
 
 const AppDrawerNavigation = createDrawerNavigator({
-  Home        : HomeStack,
-  News        : NewsStack,
-  About       : AboutStack,
-  Form        : FormStack,
-  Admissions  : AdmissionsStack,
-  Contact     : ContactStack,
+  Home: HomeStack,
+  News: NewsStack,
+  About: AboutStack,
+  Form: FormStack,
+  Admissions: AdmissionsStack,
+  Contact: ContactStack,
   Notification: NotificationStack,
-  Help        : HelpStack,
+  Help: HelpStack,
 }, {
   contentComponent: CustomSideBar,
   contentOptions: {
@@ -65,7 +64,6 @@ const AppDrawerNavigation = createDrawerNavigator({
   },
   initialRouteName: 'Home'
 })
-
 
 const styles = StyleSheet.create({
   wrapBanner: {

@@ -22,13 +22,12 @@ export default createStackNavigator({
                 position: 'absolute',
                 left: 0
             },
-            headerLeft: <Icon 
+            headerLeft: <Icon
                 style={{ paddingLeft: 10, color: 'white' }}
                 onPress={() => navigation.openDrawer()}
                 name='md-menu'
                 size={30}
             />,
-            
-          }),
+        }),
     }
 });

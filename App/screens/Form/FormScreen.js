@@ -1,17 +1,66 @@
 import React, { Component } from 'react'
-import { Text, View, ScrollView, StyleSheet, StatusBar, ImageBackground, Image, Dimensions } from 'react-native'
-import { Container } from 'native-base'
+import { Text, View, ScrollView, StyleSheet, StatusBar, ImageBackground, Image, Dimensions, Linking } from 'react-native'
+import { Container, Accordion, Icon, Content } from 'native-base'
 import Footer from './../Footer/index'
+import HTML from 'react-native-render-html';
 
 const WIDTH_SCREEN = Dimensions.get('window').width
 const HEIGHT_SCREEN = Dimensions.get('window').height
 
 export default class FormScreen extends Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            events: [],
+        }
+    }
+
+    componentDidMount() {
+        fetch('https://uitse.000webhostapp.com/api/forms/')
+            .then(data => data.json())
+            .then(data => {
+                this.setState({
+                    events: data
+                })
+            })
+            .catch(error => alert("b"));
+    }
+
+    _renderHeader(item, expanded) {
+        return (
+            <View style={{
+                flexDirection: "row",
+                padding: 10,
+                justifyContent: "space-between",
+                alignItems: "center",
+                backgroundColor: "#fff"
+            }}>
+                <Text style={{ fontStyle: 'normal', fontFamily: 'Roboto', fontSize: 16, fontWeight: "bold" }}>
+                    {" "}{item.title}
+                </Text>
+            </View>
+        );
+    }
+
+    _renderContent = ({ content }) => {
+        return (
+            <View style={{ backgroundColor: "#e5e5e5", padding: 10 }} >
+                <HTML
+                    html={content}
+                    onLinkPress={(event, href) => {
+                        Linking.openURL(href)
+                    }}
+                    imagesMaxWidth={WIDTH_SCREEN / 1.06}
+                />
+            </View>
+        )
+    }
+
     render() {
         return (
             <View style={styles.container}>
                 <StatusBar translucent backgroundColor="rgba(0, 0, 0, 0.2)" />
-                <View style={{ height: 264 }}>
+                <View style={{ height: 220 }}>
                     <ImageBackground
                         style={styles.wrapHeader}
                         source={require('../../assets/images/header_img.png')}>
@@ -23,10 +72,16 @@ export default class FormScreen extends Component {
                 </View>
                 <Container >
                     <ScrollView>
-                        <View>
-                            <Text style={{ padding: 10, textAlign: 'justify' }}> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur porttitor augue sit amet cursus lobortis. Vivamus pulvinar lectus libero, quis rutrum orci bibendum sit amet. Morbi dignissim nunc in dictum congue. Nam ante urna, gravida vitae purus quis, facilisis efficitur ex. Donec posuere varius augue a consectetur. Aliquam dapibus augue lorem, sit amet vestibulum tortor interdum sed. Vivamus a lacus vel elit sollicitudin cursus et ac felis. Vivamus venenatis tortor sit amet commodo volutpat. Nunc tempor, magna non ullamcorper blandit, enim lectus imperdiet lectus, id sagittis tellus metus nec nunc. Praesent et sagittis erat. Nunc feugiat porta placerat. Donec laoreet libero at dolor consectetur tristique. Aliquam dictum elit ut augue ultricies, ut suscipit justo lacinia. Pellentesque lacinia leo faucibus neque consequat, sit amet pretium turpis lacinia.
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur porttitor augue sit amet cursus lobortis. Vivamus pulvinar lectus libero, quis rutrum orci bibendum sit amet. Morbi dignissim nunc in dictum congue. Nam ante urna, gravida vitae purus quis, facilisis efficitur ex. Donec posuere varius augue a consectetur. Aliquam dapibus augue lorem, sit amet vestibulum tortor interdum sed. Vivamus a lacus vel elit sollicitudin cursus et ac felis. Vivamus venenatis tortor sit amet commodo volutpat. Nunc tempor, magna non ullamcorper blandit, enim lectus imperdiet lectus, id sagittis tellus metus nec nunc. Praesent et sagittis erat. Nunc feugiat porta placerat. Donec laoreet libero at dolor consectetur tristique. Aliquam dictum elit ut augue ultricies, ut suscipit justo lacinia. Pellentesque lacinia leo faucibus neque consequat, sit amet pretium turpis lacinia </Text>
-                        </View>
+                        <Content style={{ marginTop: 5 }}>
+                            <Accordion
+                                dataArray={this.state.events}
+                                headerStyle={{ backgroundColor: "#fff", fontWeight: 'bold' }}
+                                animation={true}
+                                expanded={false}
+                                renderHeader={this._renderHeader}
+                                renderContent={this._renderContent}
+                            />
+                        </Content>
                         <Footer />
                     </ScrollView>
                 </Container>
@@ -43,11 +98,11 @@ const styles = StyleSheet.create({
         position: 'absolute',
         width: WIDTH_SCREEN,
         height: HEIGHT_SCREEN,
-        top: -60
+        top: -68
     },
     wrapHeader: {
         width: '100%',
-        height: 264,
+        height: 240,
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',

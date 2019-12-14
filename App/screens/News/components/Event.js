@@ -1,19 +1,76 @@
 import React, { Component } from 'react'
-import { Text, View } from 'react-native'
+import { Text, View, StyleSheet, ScrollView, Dimensions, Linking } from 'react-native'
 import Footer from './../../Footer/index'
-import { Container } from 'native-base'
-import { ScrollView } from 'react-native-gesture-handler'
+import { Container, Accordion, Icon, Content } from 'native-base'
+import HTML from 'react-native-render-html'
 
 export default class Event extends Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            events: [],
+        }
+    }
+
+    componentDidMount() {
+        fetch('https://uitse.000webhostapp.com/api/news/categroup/SKNB')
+            .then(data => data.json())
+            .then(data => {
+                this.setState({
+                    events: data
+                })
+            })
+            .catch(error => alert("b"));
+    }
+
+    _renderHeader(item, expanded) {
+        return (
+            <View style={{
+                flexDirection: "row",
+                padding: 10,
+                justifyContent: "space-between",
+                alignItems: "center",
+                backgroundColor: "#fff"
+            }}>
+                <Text style={{ fontStyle: 'normal', fontFamily: 'Roboto', fontSize: 16, fontWeight: "bold" }}>
+                    {" "}{item.title}
+                </Text>
+                {expanded
+                    ? <Icon style={{ fontSize: 20 }} name="angle-up" type="FontAwesome" />
+                    : <Icon style={{ fontSize: 20 }} name="angle-down" type="FontAwesome" />}
+            </View>
+        );
+    }
+
+    _renderContent = ({ content }) => {
+        return (
+            <View style={{ backgroundColor: "#e5e5e5", padding: 10 }} >
+                <HTML
+                    html={content}
+                    onLinkPress={(event, href) => {
+                        Linking.openURL(href)
+                    }}
+                    imagesMaxWidth={Dimensions.get('window').width / 1.055}
+                />
+            </View>
+        )
+    }
+
     render() {
         return (
             <Container>
                 <ScrollView>
-                    <View>
-                        <Text style={{padding:10, textAlign: 'justify'}}> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur porttitor augue sit amet cursus lobortis. Vivamus pulvinar lectus libero, quis rutrum orci bibendum sit amet. Morbi dignissim nunc in dictum congue. Nam ante urna, gravida vitae purus quis, facilisis efficitur ex. Donec posuere varius augue a consectetur. Aliquam dapibus augue lorem, sit amet vestibulum tortor interdum sed. Vivamus a lacus vel elit sollicitudin cursus et ac felis. Vivamus venenatis tortor sit amet commodo volutpat. Nunc tempor, magna non ullamcorper blandit, enim lectus imperdiet lectus, id sagittis tellus metus nec nunc. Praesent et sagittis erat. Nunc feugiat porta placerat. Donec laoreet libero at dolor consectetur tristique. Aliquam dictum elit ut augue ultricies, ut suscipit justo lacinia. Pellentesque lacinia leo faucibus neque consequat, sit amet pretium turpis lacinia.
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur porttitor augue sit amet cursus lobortis. Vivamus pulvinar lectus libero, quis rutrum orci bibendum sit amet. Morbi dignissim nunc in dictum congue. Nam ante urna, gravida vitae purus quis, facilisis efficitur ex. Donec posuere varius augue a consectetur. Aliquam dapibus augue lorem, sit amet vestibulum tortor interdum sed. Vivamus a lacus vel elit sollicitudin cursus et ac felis. Vivamus venenatis tortor sit amet commodo volutpat. Nunc tempor, magna non ullamcorper blandit, enim lectus imperdiet lectus, id sagittis tellus metus nec nunc. Praesent et sagittis erat. Nunc feugiat porta placerat. Donec laoreet libero at dolor consectetur tristique. Aliquam dictum elit ut augue ultricies, ut suscipit justo lacinia. Pellentesque lacinia leo faucibus neque consequat, sit amet pretium turpis lacinia </Text>
-                    </View>
-                    <Footer/>
+                    <Content style={{ marginTop: 5 }}>
+                        <Accordion
+                            dataArray={this.state.events}
+                            headerStyle={{ backgroundColor: "#fff", fontWeight: 'bold' }}
+                            animation={true}
+                            expanded={false}
+                            renderHeader={this._renderHeader}
+                            renderContent={this._renderContent}
+                        />
+                    </Content>
+                    <Footer />
                 </ScrollView>
             </Container>
         )

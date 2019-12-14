@@ -1,10 +1,13 @@
 //This is an example code for Navigation Drawer with Custom Side bar//
 import React, { Component } from 'react';
-import { View, StyleSheet, Image, Text, ImageBackground } from 'react-native';
+import { View, StyleSheet, Image, Text, ImageBackground, Dimensions } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import Icon2 from 'react-native-vector-icons/Ionicons';
 import { Switch, Right } from 'native-base';
- 
+
+const WIDTH_SCREEN = Dimensions.get('window').width
+const HEIGHT_SCREEN = Dimensions.get('window').height
+
 export default class CustomSidebarMenu extends Component {
   constructor() {
     super();
@@ -18,37 +21,37 @@ export default class CustomSidebarMenu extends Component {
 
     this.items = [
       {
-        key:1,
+        key: 1,
         navOptionThumb: 'home',
         navOptionName: 'Trang Chủ',
         screenToNavigate: 'Home',
       },
       {
-        key:2,
+        key: 2,
         navOptionThumb: 'envelope', //newspaper
         navOptionName: 'Tin Tức',
         screenToNavigate: 'News',
       },
       {
-        key:3,
+        key: 3,
         navOptionThumb: 'chrome', //kiss-wink-heart
         navOptionName: 'Giới Thiệu',
         screenToNavigate: 'About',
       },
       {
-        key:4,
+        key: 4,
         navOptionThumb: 'list', //wpforms
         navOptionName: 'Biểu Mẫu',
         screenToNavigate: 'Form',
       },
       {
-        key:5,
+        key: 5,
         navOptionThumb: 'book-reader',
-        navOptionName: 'Tuyển sinh',
+        navOptionName: 'Tuyển dụng',
         screenToNavigate: 'Admissions',
       },
       {
-        key:6,
+        key: 6,
         navOptionThumb: 'globe-asia', //person-booth
         navOptionName: 'Liên Hệ',
         screenToNavigate: 'Contact',
@@ -57,20 +60,20 @@ export default class CustomSidebarMenu extends Component {
 
     this.settings = [
       {
-        key:7,
+        key: 7,
         navOptionThumb: 'md-notifications',
-        navOptionName: 'Notifications',
+        navOptionName: 'Thông báo',
         screenToNavigate: 'Notification',
       },
       {
-        key:8,
-        navOptionThumb: 'question', //md-git-pull-request
-        navOptionName: 'Help & Feekback',
+        key: 8,
+        navOptionThumb: '  question', //md-git-pull-request
+        navOptionName: ' Trợ giúp & Phản hồi',
         screenToNavigate: 'Help',
       },
     ]
   }
-  
+
   render() {
     console.log(global.currentScreenIndex)
     return (
@@ -80,11 +83,11 @@ export default class CustomSidebarMenu extends Component {
           <ImageBackground
             source={require('../../assets/images/banner.png')}
             style={styles.sideBanner}>
-              <Image source={ require('../../assets/images/title_logo.png') } />
-              <Text style={ styles.titleBanner }>Khoa Công Nghệ Phần Mềm</Text>
+            <Image source={require('../../assets/images/title_logo.png')} />
+            <Text style={styles.titleBanner}>Khoa Công Nghệ Phần Mềm</Text>
           </ImageBackground>
         </View>
-      
+
         {/*Setting up Navigation Options from option array using loop*/}
         <View style={{ width: '100%' }}>
           {this.items.map((item, key) => (
@@ -125,8 +128,16 @@ export default class CustomSidebarMenu extends Component {
           }}
         />
 
-        <View style={ styles.settings }>
-          <Text style={ styles.titleSetting }>Settings</Text>
+        <View style={styles.settings}>
+          <View style={{ flexDirection: 'row' }}>
+            <Text style={styles.titleSetting}>Cài đặt</Text>
+            <Image
+              style={{ marginTop: 20, marginBottom: 10, alignContent: 'center', width: 22, height: 16 }}
+              source={require('../../assets/images/iconUS.png')} />
+            <Image
+              style={{ marginTop: 20,marginLeft: 8, marginBottom: 10, alignContent: 'center', width: 22, height: 16 }}
+              source={require('../../assets/images/iconVN.png')} />
+          </View>
           {this.settings.map((item, key) => (
             <View
               style={{
@@ -152,7 +163,7 @@ export default class CustomSidebarMenu extends Component {
                 {item.navOptionName}
               </Text>
               {
-                item.screenToNavigate == 'NotificationScreen' && <Right ><Switch onValueChange={() => this.setState({ isToggle: !this.state.isToggle })} value={this.state.isToggle}  /></Right>
+                item.screenToNavigate == 'NotificationScreen' && <Right ><Switch onValueChange={() => this.setState({ isToggle: !this.state.isToggle })} value={this.state.isToggle} /></Right>
               }
             </View>
           ))}
@@ -182,6 +193,7 @@ const styles = StyleSheet.create({
   settings: {
   },
   titleSetting: {
+    width: '65%',
     marginTop: 20,
     marginLeft: 20,
     marginBottom: 10,
