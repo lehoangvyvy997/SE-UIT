@@ -14,7 +14,7 @@ export default createStackNavigator({
                 paddingTop: 50,
             },
             headerTintColor: '#fff',
-            headerTitle: 'Tuyển sinh',
+            headerTitle: 'Tuyển dụng',
             headerTitleStyle: {
                 fontWeight: 'bold',
                 textAlign: 'center',

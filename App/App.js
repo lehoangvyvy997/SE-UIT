@@ -37,7 +37,7 @@ export default class App extends React.Component {
 const CustomDrawerComponent = (props) => (
   <SafeAreaView style={{ flex: 1 }}>
     <View style={{ height: 150, backgroundColor: 'white', alignItems: 'center', justifyContent: 'center' }}>
-      <ImageBackground source={require('./assets/images/banner.png')} style={styles.wrapBanner} >
+      <ImageBackground source={require('./assets/images/banner.jpg')} style={styles.wrapBanner} >
         <Image source={require('./assets/images/title_logo.png')} />
         <Text style={styles.titleBanner}>Khoa Công Nghệ Phần Mềm</Text>
       </ImageBackground>

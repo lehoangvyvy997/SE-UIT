@@ -81,7 +81,7 @@ export default class CustomSidebarMenu extends Component {
         {/*Top Large Image */}
         <View style={{ height: 150, backgroundColor: 'white', alignItems: 'center', justifyContent: 'center' }}>
           <ImageBackground
-            source={require('../../assets/images/banner.png')}
+            source={require('../../assets/images/banner.jpg')}
             style={styles.sideBanner}>
             <Image source={require('../../assets/images/title_logo.png')} />
             <Text style={styles.titleBanner}>Khoa Công Nghệ Phần Mềm</Text>

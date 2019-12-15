@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, View, StyleSheet, StatusBar, Image, Dimensions, ImageBackground, TouchableOpacity, FlatList, ScrollView } from 'react-native'
+import { Text, View, StyleSheet, StatusBar, Image, Dimensions, ImageBackground, TouchableOpacity, FlatList, ScrollView, Linking } from 'react-native'
 import { Content, Card, CardItem, Body, Container, ScrollableTab, TabHeading, Accordion, Icon } from 'native-base';
 import Swiper from 'react-native-swiper'
 import uuidv4 from 'uuid/v4'
@@ -58,7 +58,7 @@ export default class HomeScreen extends Component {
   //   }
   //   else if (type === 2) {
   //     this.setState({
-  //       btImg: require('../../assets/images/banner.png')
+  //       btImg: require('../../assets/images/banner.jpg')
   //     })
   //   }
   //   else {
