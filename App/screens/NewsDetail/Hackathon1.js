@@ -31,7 +31,7 @@ export default class NewsDetailScreen extends Component {
         return (
             <View style={styles.container}>
                 {/* <StatusBar translucent backgroundColor="rgba(0, 0, 0, 0.2)" /> */}
-                <Container style = {{flex:1}}>
+                <Container>
                     <ScrollView>
                         <Content style={{ margin: 10 }}>
                             <HTML
@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
         marginTop: 12,
         backgroundColor: '#fff',
         flex: 1,
-        position: 'absolute',
+        position: 'relative',
         width: WIDTH_SCREEN,
         height: HEIGHT_SCREEN,
     }

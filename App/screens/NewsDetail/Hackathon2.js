@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
         marginTop: 5,
         backgroundColor: '#fff',
         flex: 1,
-        position: 'absolute',
+        position: 'relative',
         width: WIDTH_SCREEN,
         height: HEIGHT_SCREEN,
     }

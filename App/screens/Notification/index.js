@@ -9,21 +9,26 @@ export default createStackNavigator({
         screen: NotificationScreen,
         navigationOptions: ({ navigation }) => ({
             headerStyle: {
-                backgroundColor: '#3a9ad3',
+                backgroundColor: 'transparent',
+                zIndex: 10,
+                paddingTop: 50,
             },
             headerTintColor: '#fff',
+            headerTitle: 'Thông báo',
             headerTitleStyle: {
                 fontWeight: 'bold',
                 textAlign: 'center',
-                flex: 1
+                flex: 1,
+                position: 'absolute',
+                left: 0
             },
-            headerLeft: <Icon 
+            headerLeft: <Icon
                 style={{ paddingLeft: 10, color: 'white' }}
                 onPress={() => navigation.openDrawer()}
                 name='md-menu'
                 size={30}
             />,
-            
-          }),
+
+        }),
     }
 });
